@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Api';
+  title = 'Registro de usuarios';
+  delete = '';
+  element = [];
+  constructor(public data: ApiService) {
+    this.data.getData().subscribe((res) => {
+      this.element = res;
+      console.log(this.element);
+    });
+  };
+
+  removeData() {
+    this.data.removeData().subscribe(x => console.log(x));
+  }
 }
